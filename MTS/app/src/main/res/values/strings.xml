@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">МТС</string>
+
+    //main activity
+    <string name="title_activity_main">МТС</string>
+    <string name="header_activity_main">Макси</string>
+    <string name="login">Войти</string>
+
+    //modules activity
+    <string name="title_modules_main">Разделы</string>
+    <string name="title_connected_equipment">Подключённое оборудование</string>
+
+</resources>
