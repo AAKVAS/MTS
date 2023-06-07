@@ -8,6 +8,7 @@ import com.example.mts.connectedEquipment.domain.entity.Cable;
 import com.example.mts.connectedEquipment.domain.entity.ConnectedEquipment;
 import com.example.mts.connectedEquipment.domain.entity.Switchboard;
 import com.example.mts.connectedEquipment.domain.entity.SwitchboardModel;
+import com.example.mts.modules.data.DAO.ModuleDAO;
 import com.example.mts.modules.domain.entity.Module;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.support.ConnectionSource;
@@ -32,6 +33,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, Cable.class);
             TableUtils.createTable(connectionSource, ConnectedEquipment.class);
             TableUtils.createTable(connectionSource, Module.class);
+
+            ModuleDAO moduleDAO = new ModuleDAO(getConnectionSource(), Module.class);
+            moduleDAO.create(new Module("Подключённое оборудование"));
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e.getMessage());
@@ -49,6 +53,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
                     TableUtils.createTable(connectionSource, Cable.class);
                     TableUtils.createTable(connectionSource, ConnectedEquipment.class);
                     TableUtils.createTable(connectionSource, Module.class);
+
+                    ModuleDAO moduleDAO = new ModuleDAO(getConnectionSource(), Module.class);
+                    moduleDAO.create(new Module("Подключённое оборудование"));
             }
         } catch (SQLException e) {
             e.printStackTrace();

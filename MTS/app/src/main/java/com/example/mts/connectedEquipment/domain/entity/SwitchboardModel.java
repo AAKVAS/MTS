@@ -4,6 +4,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.util.Collection;
 import java.util.List;
 
 @DatabaseTable(tableName = "SWITCHBOARD_MODEL")
@@ -22,7 +23,7 @@ public class SwitchboardModel {
     private int maxPortAmount;
 
     @ForeignCollectionField()
-    private List<Switchboard> switchboardList;
+    private Collection<Switchboard> switchboardList;
 
     public SwitchboardModel() {}
 
@@ -57,7 +58,7 @@ public class SwitchboardModel {
         this.maxPortAmount = maxPortAmount;
     }
 
-    public List<Switchboard> getSwitchboardList() {
+    public Collection<Switchboard> getSwitchboardList() {
         return switchboardList;
     }
 

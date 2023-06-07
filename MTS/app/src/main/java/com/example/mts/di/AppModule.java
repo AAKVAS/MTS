@@ -4,6 +4,9 @@ import android.content.Context;
 
 import androidx.annotation.NonNull;
 
+import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.j256.ormlite.support.ConnectionSource;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -22,5 +25,11 @@ public class AppModule {
     @Singleton
     public Context provideContext() {
         return context;
+    }
+
+    @Provides
+    @Singleton
+    public ConnectionSource connectionSource(Context context) {
+        return OpenHelperManager.getHelper(context).getConnectionSource();
     }
 }

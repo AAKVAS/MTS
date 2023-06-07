@@ -4,6 +4,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.util.Collection;
 import java.util.List;
 
 @DatabaseTable(tableName = "CABLE")
@@ -18,7 +19,7 @@ public class Cable {
     private String name;
 
     @ForeignCollectionField()
-    private List<ConnectedEquipment> connectedEquipmentList;
+    private Collection<ConnectedEquipment> connectedEquipmentList;
 
     public Cable() {}
 
@@ -44,7 +45,7 @@ public class Cable {
         this.name = name;
     }
 
-    public List<ConnectedEquipment> getConnectedEquipmentList() {
+    public Collection<ConnectedEquipment> getConnectedEquipmentList() {
         return connectedEquipmentList;
     }
 

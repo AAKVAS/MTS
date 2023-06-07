@@ -4,8 +4,7 @@ import android.content.Context;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 
-public class DatabaseHelperFactory{
-
+public class DatabaseHelperFactory {
     private static DatabaseHelper helper;
 
     public static DatabaseHelper getHelper(){

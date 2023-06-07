@@ -4,6 +4,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.util.Collection;
 import java.util.List;
 
 @DatabaseTable(tableName = "SWITCHBOARD")
@@ -20,7 +21,9 @@ public class Switchboard {
     private SwitchboardModel model;
 
     @ForeignCollectionField()
-    private List<ConnectedEquipment> connectedEquipmentList;
+    private Collection<ConnectedEquipment> connectedEquipmentList;
+
+    public Switchboard() {}
 
     public Switchboard(int id, Building building, SwitchboardModel model, List<ConnectedEquipment> connectedEquipmentList) {
         this.id = id;
@@ -53,7 +56,7 @@ public class Switchboard {
         this.model = model;
     }
 
-    public List<ConnectedEquipment> getConnectedEquipmentList() {
+    public Collection<ConnectedEquipment> getConnectedEquipmentList() {
         return connectedEquipmentList;
     }
 
