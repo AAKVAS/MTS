@@ -12,7 +12,7 @@ import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
 /**
- * Класс-UseСase загрузки списка модулей из БД.
+ * Класс-UseСase загрузки списка модулей.
  */
 public class GetModulesUseCase {
     /**
@@ -21,14 +21,14 @@ public class GetModulesUseCase {
     ModulesRepository modulesRepository;
 
     /**
-     * Планировщик для извлечения записей из БД.
+     * Планировщик для извлечения записей.
      */
     Scheduler executorScheduler;
 
     /**
      * Конструктор класса GetModulesUseCase.
      * @param repository репозиторий для работы с модулями.
-     * @param executorScheduler планировщик для извлечения записей из БД.
+     * @param executorScheduler планировщик для извлечения записей.
      */
     @Inject
     public GetModulesUseCase(ModulesRepository repository, Scheduler executorScheduler) {
@@ -37,7 +37,7 @@ public class GetModulesUseCase {
     }
 
     /**
-     * Выполнение извлечения модулей из БД.
+     * Выполнение извлечения модулей.
      * @return
      */
     public Maybe<List<Module>> execute() {

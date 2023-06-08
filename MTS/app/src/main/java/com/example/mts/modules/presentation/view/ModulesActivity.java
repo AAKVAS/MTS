@@ -1,22 +1,25 @@
-package com.example.mts.modules.presentation;
+package com.example.mts.modules.presentation.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.mts.MTSApplication;
 import com.example.mts.R;
 import com.example.mts.modules.di.ModulesActivityComponent;
 import com.example.mts.modules.di.ModulesActivityModule;
+import com.example.mts.modules.domain.entity.Module;
+import com.example.mts.modules.presentation.presenter.ModulesActivityPresenter;
 
 import javax.inject.Inject;
 
 /**
  * Активность "Модули".
  */
-public class ModulesActivity extends AppCompatActivity implements ModuleView {
+public class ModulesActivity extends AppCompatActivity implements ModulesView {
     /**
      * Представитель активности.
      */
@@ -54,10 +57,21 @@ public class ModulesActivity extends AppCompatActivity implements ModuleView {
     @Override
     public void fillModuleList() {
         RecyclerView recyclerView = findViewById(R.id.rv_module);
-        ModulesAdapter adapter = new ModulesAdapter(presenter.getModules());
+        ModulesAdapter adapter = new ModulesAdapter(presenter.getModules(), new ModulesAdapter.OnClickListener() {
+            @Override
+            public void onClick(Module module, int position) {
+                presenter.onModuleClick(module);
+            }
+        });
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void openModule(Module module) {
+        Intent intent = new Intent(this, module.getModuleActivityClass());
+        startActivity(intent);
     }
 }

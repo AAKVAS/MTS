@@ -1,7 +1,9 @@
-package com.example.mts.modules.presentation;
+package com.example.mts.modules.presentation.view;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.mts.modules.presentation.presenter.ModulesActivityPresenter;
 
 /**
  * ViewHolder модуля.
@@ -12,6 +14,11 @@ public class ModulesViewHolder extends RecyclerView.ViewHolder {
      * Представление конкретного модуля в списке.
      */
     private CardView cardView;
+
+    /**
+     * Представитель активности "Модули".
+     */
+    private ModulesActivityPresenter presenter;
 
     /**
      * Конструктор класса ModulesViewHolder.

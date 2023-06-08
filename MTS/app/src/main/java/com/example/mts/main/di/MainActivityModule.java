@@ -7,20 +7,38 @@ import com.example.mts.main.presentation.MainView;
 import dagger.Module;
 import dagger.Provides;
 
+/**
+ * Модуль главной активности приложения. Предоставляет реализации для внедрения.
+ */
 @Module
 public class MainActivityModule {
-
+    /**
+     * Главная активность приложения.
+     */
     private MainActivity mainActivity;
 
+    /**
+     * Конструктор класса MainActivityModule.
+     * @param mainActivity главная активность приложения.
+     */
     public MainActivityModule(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
     }
+
+    /**
+     * Возвращает реализацию представителя главной активности приложения.
+     * @return представитель главной активности приложения.
+     */
     @Provides
     @MainActivityScope
     public MainActivityPresenter provideMainActivityPresenter() {
         return new MainActivityPresenter(mainActivity);
     }
 
+    /**
+     * Возвращает представление модуля "Модули".
+     * @return представление модуля "Модули".
+     */
     @Provides
     public MainView provideMainView() {
         return mainActivity;

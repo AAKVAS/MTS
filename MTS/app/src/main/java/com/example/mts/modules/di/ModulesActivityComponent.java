@@ -1,6 +1,6 @@
 package com.example.mts.modules.di;
 
-import com.example.mts.modules.presentation.ModulesActivity;
+import com.example.mts.modules.presentation.view.ModulesActivity;
 
 import dagger.Subcomponent;
 

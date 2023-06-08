@@ -44,6 +44,11 @@ public class ConnectedEquipment {
         this.mac = mac;
     }
 
+    @Override
+    public String toString() {
+        return switchboard.getModel().getName() + portNumber;
+    }
+
     public int getId() {
         return id;
     }

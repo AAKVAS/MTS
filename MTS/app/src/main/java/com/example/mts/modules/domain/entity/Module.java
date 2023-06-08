@@ -6,28 +6,17 @@ import com.j256.ormlite.table.DatabaseTable;
 /**
  * Модуль мобильной торговой системы.
  */
-@DatabaseTable(tableName = "MODULES")
 public class Module {
-    /**
-     * Название атрибута UID.
-     */
-    public static final String UID = "UID";
-    /**
-     * Название атрибута NAME.
-     */
-    public static final String NAME = "NAME";
-
-    /**
-     * Id модуля.
-     */
-    @DatabaseField(generatedId = true, columnName = UID)
-    private int id;
 
     /**
      * Название модуля.
      */
-    @DatabaseField(columnName = NAME)
     private String name;
+
+    /**
+     * Класс активности модуля.
+     */
+    private Class moduleActivityClass;
 
     /**
      * Конструктор по умолчанию.
@@ -37,35 +26,11 @@ public class Module {
     /**
      * Конструктор класса Module.
      * @param name название модуля.
+     * @param moduleActivityClass класс активности модуля.
      */
-    public Module(String name) {
+    public Module(String name, Class moduleActivityClass) {
         this.name = name;
-    }
-
-    /**
-     * Конструктор класса Module.
-     * @param id идентификатор модуля.
-     * @param name название модуля.
-     */
-    public Module(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    /**
-     * Возвращает id модуля.
-     * @return id.
-     */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * Устанавливает id модуля.
-     * @param id идентификатор модуля.
-     */
-    public void setId(int id) {
-        this.id = id;
+        this.moduleActivityClass = moduleActivityClass;
     }
 
     /**
@@ -82,5 +47,9 @@ public class Module {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Class getModuleActivityClass() {
+        return moduleActivityClass;
     }
 }

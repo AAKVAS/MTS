@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".modules.presentation.ModulesActivity">
+    tools:context=".modules.presentation.view.ModulesActivity">
 
     <LinearLayout
         android:layout_height="wrap_content"

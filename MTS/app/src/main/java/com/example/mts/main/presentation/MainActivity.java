@@ -10,7 +10,7 @@ import com.example.mts.MTSApplication;
 import com.example.mts.R;
 import com.example.mts.main.di.MainActivityComponent;
 import com.example.mts.main.di.MainActivityModule;
-import com.example.mts.modules.presentation.ModulesActivity;
+import com.example.mts.modules.presentation.view.ModulesActivity;
 
 import javax.inject.Inject;
 

@@ -1,7 +1,8 @@
-package com.example.mts.modules.presentation;
+package com.example.mts.modules.presentation.presenter;
 
 import com.example.mts.modules.domain.entity.Module;
 import com.example.mts.modules.domain.interactor.GetModulesUseCase;
+import com.example.mts.modules.presentation.view.ModulesView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +19,9 @@ public class ModulesActivityPresenter {
     /**
      * Представление модуля.
      */
-    ModuleView moduleView;
+    ModulesView moduleView;
     /**
-     * UseСase загрузки списка модулей из БД.
+     * UseСase загрузки списка модулей.
      */
     GetModulesUseCase getModulesUseCase;
 
@@ -40,7 +41,7 @@ public class ModulesActivityPresenter {
      * @param getModulesUseCase UseCase загрузки списка модулей.
      */
     @Inject
-    public ModulesActivityPresenter(ModuleView moduleView, GetModulesUseCase getModulesUseCase) {
+    public ModulesActivityPresenter(ModulesView moduleView, GetModulesUseCase getModulesUseCase) {
         this.moduleView = moduleView;
         this.getModulesUseCase = getModulesUseCase;
     }
@@ -55,14 +56,14 @@ public class ModulesActivityPresenter {
     }
 
     /**
-     * Загружает список модулей из базы данных.
+     * Загружает список модулей.
      */
     private void loadModules() {
         getModulesUseCase.execute().subscribe(new LoadModulesObserver());
     }
 
     /**
-     * Класс-наблюдатель, обновляющий список модулей в представлении после успешной выгрузки из БД.
+     * Класс-наблюдатель, обновляющий список модулей в представлении после успешной выгрузки.
      */
     private class LoadModulesObserver implements MaybeObserver<List<Module>> {
 
@@ -110,5 +111,13 @@ public class ModulesActivityPresenter {
      */
     public void setModules(List<Module> modules) {
         this.modules = modules;
+    }
+
+    /**
+     * Возникает при нажатии на элемент списка модулей.
+     * @param module нажатый модуль.
+     */
+    public void onModuleClick(Module module) {
+        moduleView.openModule(module);
     }
 }
