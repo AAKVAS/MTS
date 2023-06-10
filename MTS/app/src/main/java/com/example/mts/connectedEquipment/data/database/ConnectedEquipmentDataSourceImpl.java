@@ -1,6 +1,6 @@
 package com.example.mts.connectedEquipment.data.database;
 
-import com.example.mts.connectedEquipment.data.dao.DAOConnectedEquipment;
+import com.example.mts.connectedEquipment.data.dao.ConnectedEquipmentDAO;
 import com.example.mts.connectedEquipment.domain.entity.ConnectedEquipment;
 
 import java.sql.SQLException;
@@ -14,21 +14,36 @@ import javax.inject.Inject;
 public class ConnectedEquipmentDataSourceImpl implements ConnectedEquipmentDataSource {
 
     /**
-     * DAO для работы с подключённым оборудованиемю
+     * DAO для работы с подключённым оборудованием.
      */
-    private DAOConnectedEquipment daoConnectedEquipment;
+    private ConnectedEquipmentDAO connectedEquipmentDAO;
 
     /**
      * Конструктор класса ConnectedEquipmentDataSourceImpl.
-     * @param daoConnectedEquipment DAO для доступа к подключённому оборудованию.
+     * @param connectedEquipmentDAO DAO для доступа к подключённому оборудованию.
      */
     @Inject
-    public ConnectedEquipmentDataSourceImpl(DAOConnectedEquipment daoConnectedEquipment) {
-        this.daoConnectedEquipment = daoConnectedEquipment;
+    public ConnectedEquipmentDataSourceImpl(ConnectedEquipmentDAO connectedEquipmentDAO) {
+        this.connectedEquipmentDAO = connectedEquipmentDAO;
     }
 
     @Override
     public List<ConnectedEquipment> getConnectedEquipment() throws SQLException {
-        return daoConnectedEquipment.queryForAll();
+        return connectedEquipmentDAO.queryForAll();
+    }
+
+    @Override
+    public void deleteConnectedEquipment(int id) throws SQLException {
+        connectedEquipmentDAO.deleteById(id);
+    }
+
+    @Override
+    public void createConnectedEquipment(ConnectedEquipment connectedEquipment) throws SQLException {
+        connectedEquipmentDAO.create(connectedEquipment);
+    }
+
+    @Override
+    public void updateConnectedEquipment(ConnectedEquipment connectedEquipment) throws SQLException {
+        connectedEquipmentDAO.update(connectedEquipment);
     }
 }

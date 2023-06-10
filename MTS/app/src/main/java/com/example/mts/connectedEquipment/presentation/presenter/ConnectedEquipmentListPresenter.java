@@ -1,6 +1,7 @@
 package com.example.mts.connectedEquipment.presentation.presenter;
 
 import com.example.mts.connectedEquipment.domain.entity.ConnectedEquipment;
+import com.example.mts.connectedEquipment.domain.interactor.DeleteConnectedEquipmentUseCase;
 import com.example.mts.connectedEquipment.domain.interactor.GetConnectedEquipmentUseCase;
 import com.example.mts.connectedEquipment.presentation.view.ConnectedEquipmentListView;
 
@@ -9,6 +10,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.CompletableObserver;
 import io.reactivex.MaybeObserver;
 import io.reactivex.disposables.Disposable;
 
@@ -27,9 +29,35 @@ public class ConnectedEquipmentListPresenter {
     GetConnectedEquipmentUseCase getConnectedEquipmentUseCase;
 
     /**
+     * UseCase удаления подключённого оборудования.
+     */
+    DeleteConnectedEquipmentUseCase deleteConnectedEquipmentUseCase;
+
+    /**
      * Список модулей приложения.
      */
     private List<ConnectedEquipment> connectedEquipments = new ArrayList<>();
+
+    /**
+     * Текущая запись.
+     */
+    private ConnectedEquipment currentConnectedEquipment;
+
+    /**
+     * Возвращает список подключённого оборудования.
+     * @return список подключённого оборудования.
+     */
+    public List<ConnectedEquipment> getConnectedEquipment() {
+        return connectedEquipments;
+    }
+
+    /**
+     * Устанавливает список подключённого оборудования.
+     * @param connectedEquipments новый список подключённого оборудования.
+     */
+    public void setConnectedEquipments(List<ConnectedEquipment> connectedEquipments) {
+        this.connectedEquipments = connectedEquipments;
+    }
 
     /**
      * Конструктор по умолчанию.
@@ -42,9 +70,17 @@ public class ConnectedEquipmentListPresenter {
      * @param getConnectedEquipmentUseCase UseCase загрузки списка подключённого оборудования.
      */
     @Inject
-    public ConnectedEquipmentListPresenter(ConnectedEquipmentListView view, GetConnectedEquipmentUseCase getConnectedEquipmentUseCase) {
+    public ConnectedEquipmentListPresenter(ConnectedEquipmentListView view,
+                                           GetConnectedEquipmentUseCase getConnectedEquipmentUseCase,
+                                           DeleteConnectedEquipmentUseCase deleteConnectedEquipmentUseCase) {
         this.view = view;
         this.getConnectedEquipmentUseCase = getConnectedEquipmentUseCase;
+        this.deleteConnectedEquipmentUseCase = deleteConnectedEquipmentUseCase;
+    }
+
+    public void onDestroy() {
+        getConnectedEquipmentUseCase = null;
+        deleteConnectedEquipmentUseCase = null;
     }
 
     /**
@@ -64,14 +100,12 @@ public class ConnectedEquipmentListPresenter {
     }
 
     /**
-     * Класс-наблюдатель, обновляющий список модулей в представлении после успешной выгрузки.
+     * Класс-наблюдатель, обновляющий список оборудования в представлении после успешной выгрузки.
      */
     private class LoadConnectedEquipmentObserver implements MaybeObserver<List<ConnectedEquipment>> {
 
         @Override
-        public void onSubscribe(Disposable d) {
-
-        }
+        public void onSubscribe(Disposable d) {}
 
         @Override
         public void onSuccess(List<ConnectedEquipment> connectedEquipments) {
@@ -82,13 +116,11 @@ public class ConnectedEquipmentListPresenter {
 
         @Override
         public void onError(Throwable e) {
-            throw new RuntimeException(e.getMessage());
+            throw new RuntimeException("Возникла ошибка при получении списка модулей.");
         }
 
         @Override
-        public void onComplete() {
-
-        }
+        public void onComplete() {}
     }
 
     /**
@@ -99,26 +131,45 @@ public class ConnectedEquipmentListPresenter {
     }
 
     /**
-     * Возвращает список подключённого оборудования.
-     * @return список подключённого оборудования.
-     */
-    public List<ConnectedEquipment> getConnectedEquipment() {
-        return connectedEquipments;
-    }
-
-    /**
-     * Устанавливает список подключённого оборудования.
-     * @param connectedEquipments новый список подключённого оборудования.
-     */
-    public void setConnectedEquipments(List<ConnectedEquipment> connectedEquipments) {
-        this.connectedEquipments = connectedEquipments;
-    }
-
-    /**
      * Возникает при нажатии на элемент списка подключённого оборудования.
-     * @param connectedEquipment нажатый модуль.
+     * @param connectedEquipment нажатый элемент.
      */
-    public void onModuleClick(ConnectedEquipment connectedEquipment) {
-        view.openConnectedEqipmentItem(connectedEquipment);
+    public void onEquipmentClick(ConnectedEquipment connectedEquipment) {
+        view.openConnectedEquipmentItem(connectedEquipment);
+    }
+
+    /**
+     * Возникает при долгом нажатии на элемент списка подключённого оборудования.
+     * @param connectedEquipment нажатый элемент.
+     */
+    public void onEquipmentLongClick(ConnectedEquipment connectedEquipment) {
+        currentConnectedEquipment = connectedEquipment;
+        view.openDeleteConnectedEquipmentDialog();
+    }
+
+    /**
+     * Удаляет текущую запись о подключённом оборудовании.
+     */
+    public void deleteConnectedEquipment() {
+        deleteConnectedEquipmentUseCase.execute(currentConnectedEquipment.getId()).subscribe(new DeleteConnectedEquipmentObserver());
+    }
+
+    /**
+     * Класс-наблюдатель, обновляющий список оборудования в представлении после удаления записи.
+     */
+    private class DeleteConnectedEquipmentObserver implements CompletableObserver {
+
+        @Override
+        public void onSubscribe(Disposable d) {}
+
+        @Override
+        public void onComplete() {
+            loadConnectedEquipment();
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            throw new RuntimeException("Возникла ошибка при удалении записи.");
+        }
     }
 }

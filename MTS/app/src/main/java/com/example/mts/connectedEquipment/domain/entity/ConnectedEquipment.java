@@ -27,14 +27,14 @@ public class ConnectedEquipment {
     private int cableLength;
 
     @DatabaseField(columnName = IP)
-    private int ip;
+    private String ip;
 
     @DatabaseField(columnName = MAC)
-    private int mac;
+    private String mac;
 
     public ConnectedEquipment() {}
 
-    public ConnectedEquipment(int id, Switchboard switchboard, int portNumber, Cable cable, int cableLength, int ip, int mac) {
+    public ConnectedEquipment(int id, Switchboard switchboard, int portNumber, Cable cable, int cableLength, String ip, String mac) {
         this.id = id;
         this.switchboard = switchboard;
         this.portNumber = portNumber;
@@ -42,11 +42,6 @@ public class ConnectedEquipment {
         this.cableLength = cableLength;
         this.ip = ip;
         this.mac = mac;
-    }
-
-    @Override
-    public String toString() {
-        return switchboard.getModel().getName() + portNumber;
     }
 
     public int getId() {
@@ -89,19 +84,19 @@ public class ConnectedEquipment {
         this.cableLength = cableLength;
     }
 
-    public int getIp() {
+    public String getIp() {
         return ip;
     }
 
-    public void setIp(int ip) {
+    public void setIp(String ip) {
         this.ip = ip;
     }
 
-    public int getMac() {
+    public String getMac() {
         return mac;
     }
 
-    public void setMac(int mac) {
+    public void setMac(String mac) {
         this.mac = mac;
     }
 }

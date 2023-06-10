@@ -28,9 +28,17 @@ public class ConnectedEquipmentAdapter extends RecyclerView.Adapter<ConnectedEqu
         /**
          * Возникает при нажатии на элемент списка.
          * @param connectedEquipment элемент, на который произошло нажатие.
-         * @param position позиция нажатого модуля.
+         * @param position позиция нажатого элемента.
          */
         void onClick(ConnectedEquipment connectedEquipment, int position);
+
+        /**
+         * Возникает при долгом нажатии на элемент списка.
+         * @param connectedEquipment элемент, на который произошло нажатие.
+         * @param position позиция нажатого элемента.
+         * @return
+         */
+        void onLongClick(ConnectedEquipment connectedEquipment, int position);
     }
 
     /**
@@ -56,7 +64,7 @@ public class ConnectedEquipmentAdapter extends RecyclerView.Adapter<ConnectedEqu
     @Override
     public ConnectedEquipmentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         CardView cardView = (CardView) LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.card_view_module, parent, false);
+                .inflate(R.layout.card_view_connected_equipment, parent, false);
         return new ConnectedEquipmentViewHolder(cardView);
     }
 
@@ -65,14 +73,37 @@ public class ConnectedEquipmentAdapter extends RecyclerView.Adapter<ConnectedEqu
         ConnectedEquipment connectedEquipment = connectedEquipments.get(position);
 
         CardView cardView = holder.getCardView();
-        TextView textView = (TextView) cardView.findViewById(R.id.text_card);
-        textView.setText(connectedEquipment.toString());
+        setCardTitle(cardView, connectedEquipment);
+        setCardSubtitle(cardView, connectedEquipment);
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onClickListener.onClick(connectedEquipment, position);
             }
         });
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                onClickListener.onLongClick(connectedEquipment, position);
+                return true;
+            }
+        });
+    }
+
+    private void setCardTitle(CardView cardView, ConnectedEquipment connectedEquipment) {
+        String title = connectedEquipment.getSwitchboard().getBuilding().getAddress()
+                + ".\n" + connectedEquipment.getSwitchboard().getModel().getName()
+                + " порт: " + connectedEquipment.getPortNumber();
+        TextView textView = (TextView) cardView.findViewById(R.id.title);
+        textView.setText(title);
+    }
+
+    private void setCardSubtitle(CardView cardView, ConnectedEquipment connectedEquipment) {
+        String subtitle = "IP: " + connectedEquipment.getIp() + "\nMAC: " + connectedEquipment.getMac();
+        TextView textView = (TextView) cardView.findViewById(R.id.subtitle);
+        textView.setText(subtitle);
     }
 
     @Override

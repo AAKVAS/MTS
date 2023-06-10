@@ -1,6 +1,6 @@
 package com.example.mts.modules.domain.interactor;
 
-import com.example.mts.modules.data.repository.ModulesRepository;
+import com.example.mts.modules.domain.repository.ModulesRepository;
 import com.example.mts.modules.domain.entity.Module;
 
 import java.util.List;

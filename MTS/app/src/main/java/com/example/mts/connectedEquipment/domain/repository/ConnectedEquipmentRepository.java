@@ -1,39 +1,41 @@
-package com.example.mts.connectedEquipment.data.database;
+package com.example.mts.connectedEquipment.domain.repository;
 
 import com.example.mts.connectedEquipment.domain.entity.ConnectedEquipment;
 
 import java.sql.SQLException;
 import java.util.List;
 
+import io.reactivex.Completable;
+import io.reactivex.Maybe;
+
 /**
- * Источник данных подключённого оборудования.
+ * Интерфейс-репозиторий работы с подключённым оборудованием.
  */
-public interface ConnectedEquipmentDataSource {
+public interface ConnectedEquipmentRepository {
     /**
-     * Возвращает список подключённого оборудования.
-     * @return список подключённого оборудования.
-     * @throws SQLException
+     * Возвращает список модулей.
+     * @return список модулей.
      */
-    List<ConnectedEquipment> getConnectedEquipment() throws SQLException;
+    Maybe<List<ConnectedEquipment>> getConnectedEquipment();
 
     /**
      * Удаляет указанное подключённое оборудование.
      * @param id идентификатор записи подключённого оборудования.
-     * @throws SQLException
+     * @return результат удаления записи.
      */
-    void deleteConnectedEquipment(int id) throws SQLException;
+     Completable deleteConnectedEquipment(int id);
 
     /**
      * Добавляет запись о подключённом оборудовании в БД.
      * @param connectedEquipment запись подключённого оборудования, которую нужно добавить.
-     * @throws SQLException
+     * @return результат добавления записи.
      */
-    void createConnectedEquipment(ConnectedEquipment connectedEquipment) throws SQLException;
+     Completable createConnectedEquipment(ConnectedEquipment connectedEquipment);
 
     /**
      * Обновляет запись о подключённом оборудовании в БД.
      * @param connectedEquipment запись подключённого оборудования, которую нужно обновить.
-     * @throws SQLException
+     * @return результат обновления записи.
      */
-    void updateConnectedEquipment(ConnectedEquipment connectedEquipment) throws SQLException;
+     Completable updateConnectedEquipment(ConnectedEquipment connectedEquipment);
 }

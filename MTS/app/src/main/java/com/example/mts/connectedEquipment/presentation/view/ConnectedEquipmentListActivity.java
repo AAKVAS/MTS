@@ -1,9 +1,11 @@
 package com.example.mts.connectedEquipment.presentation.view;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import com.example.mts.MTSApplication;
@@ -58,14 +60,24 @@ public class ConnectedEquipmentListActivity extends AppCompatActivity implements
         presenter.fillConnectedEquipment();
     }
 
+    @Override
+    protected void onDestroy() {
+        presenter.onDestroy();
+        super.onDestroy();
+    }
 
     @Override
     public void fillConnectedEquipmentList() {
-        RecyclerView recyclerView = findViewById(R.id.rv_module);
+        RecyclerView recyclerView = findViewById(R.id.rv_connected_equipment);
         ConnectedEquipmentAdapter adapter = new ConnectedEquipmentAdapter(presenter.getConnectedEquipment(), new ConnectedEquipmentAdapter.OnClickListener() {
             @Override
             public void onClick(ConnectedEquipment connectedEquipment, int position) {
-                presenter.onModuleClick(connectedEquipment);
+                presenter.onEquipmentClick(connectedEquipment);
+            }
+
+            @Override
+            public void onLongClick(ConnectedEquipment connectedEquipment, int position) {
+                presenter.onEquipmentLongClick(connectedEquipment);
             }
         });
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -75,7 +87,32 @@ public class ConnectedEquipmentListActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void openConnectedEqipmentItem(ConnectedEquipment connectedEquipment) {
+    public void openConnectedEquipmentItem(ConnectedEquipment connectedEquipment) {
 
+    }
+
+    @Override
+    public void createConnectedEquipmentItem(ConnectedEquipment connectedEquipment) {
+
+    }
+
+    @Override
+    public void openDeleteConnectedEquipmentDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.confirm_delete)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        presenter.deleteConnectedEquipment();
+                    }
+                })
+                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 }

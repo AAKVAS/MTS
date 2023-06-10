@@ -1,10 +1,11 @@
 package com.example.mts.connectedEquipment.di;
 
-import com.example.mts.connectedEquipment.data.dao.DAOConnectedEquipment;
+import com.example.mts.connectedEquipment.data.dao.ConnectedEquipmentDAO;
 import com.example.mts.connectedEquipment.data.database.ConnectedEquipmentDataSource;
 import com.example.mts.connectedEquipment.data.database.ConnectedEquipmentDataSourceImpl;
-import com.example.mts.connectedEquipment.data.repository.ConnectedEquipmentRepository;
-import com.example.mts.connectedEquipment.data.repository.ConnectedEquipmentRepositoryImpl;
+import com.example.mts.connectedEquipment.domain.interactor.DeleteConnectedEquipmentUseCase;
+import com.example.mts.connectedEquipment.domain.repository.ConnectedEquipmentRepository;
+import com.example.mts.connectedEquipment.domain.repository.ConnectedEquipmentRepositoryImpl;
 import com.example.mts.connectedEquipment.domain.interactor.GetConnectedEquipmentUseCase;
 import com.example.mts.connectedEquipment.presentation.presenter.ConnectedEquipmentListPresenter;
 import com.example.mts.connectedEquipment.presentation.view.ConnectedEquipmentListActivity;
@@ -37,13 +38,14 @@ public class ConnectedEquipmentModule {
 
     /**
      * Возвращает представителя списка подключённого оборудования.
-     * @param useCase UseCase получения списка подключённого оборудования.
+     * @param getUseCase UseCase получения списка подключённого оборудования.
+     * @param delUseCase UseCase удаления подключённого оборудования.
      * @return представитель списка подключённого оборудования.
      */
     @Provides
     @ConnectedEquipmentScope
-    public ConnectedEquipmentListPresenter provideConnectedEquipmentListPresenter(GetConnectedEquipmentUseCase useCase) {
-        return new ConnectedEquipmentListPresenter(connectedEquipmentListActivity, useCase);
+    public ConnectedEquipmentListPresenter provideConnectedEquipmentListPresenter(GetConnectedEquipmentUseCase getUseCase, DeleteConnectedEquipmentUseCase delUseCase) {
+        return new ConnectedEquipmentListPresenter(connectedEquipmentListActivity, getUseCase, delUseCase);
     }
 
     /**
@@ -67,6 +69,17 @@ public class ConnectedEquipmentModule {
     }
 
     /**
+     * Возвращает UseCase удаления записи о подключённом оборудовании.
+     * @param repository репозиторий для работы с подключённым оборудованием.
+     * @return UseCase удаления записи о подключённом оборудовании.
+     */
+    @Provides
+    @ConnectedEquipmentScope
+    public DeleteConnectedEquipmentUseCase provideDeleteConnectedEquipmentUseCase(ConnectedEquipmentRepository repository) {
+        return new DeleteConnectedEquipmentUseCase(repository, Schedulers.io());
+    }
+
+    /**
      * Возвращает репозиторий подключённого оборудования.
      * @return репозиторий подключённого оборудования.
      */
@@ -76,20 +89,29 @@ public class ConnectedEquipmentModule {
         return new ConnectedEquipmentRepositoryImpl(connectedEquipmentDataSource);
     }
 
+    /**
+     * Возвращает источник данных подключённого оборудования.
+     * @param connectedEquipmentDAO DAO подключённого оборудования.
+     * @return источник данных подключённого оборудования.
+     */
     @Provides
     @ConnectedEquipmentScope
-    public ConnectedEquipmentDataSource provideConnectedEquipmentDataSource(DAOConnectedEquipment daoConnectedEquipment) {
-        return new ConnectedEquipmentDataSourceImpl(daoConnectedEquipment);
+    public ConnectedEquipmentDataSource provideConnectedEquipmentDataSource(ConnectedEquipmentDAO connectedEquipmentDAO) {
+        return new ConnectedEquipmentDataSourceImpl(connectedEquipmentDAO);
     }
 
+    /**
+     * Возвращает DAO подключённого оборудования.
+     * @param connectionSource источник соединения.
+     * @return DAO подключённого оборудования.
+     */
     @Provides
     @ConnectedEquipmentScope
-    public DAOConnectedEquipment provideDAOConnectedEquipment(ConnectionSource connectionSource) {
+    public ConnectedEquipmentDAO provideDAOConnectedEquipment(ConnectionSource connectionSource) {
         try {
-            return new DAOConnectedEquipment(connectionSource);
+            return new ConnectedEquipmentDAO(connectionSource);
         } catch (SQLException e) {
-            throw  new RuntimeException(e.getMessage());
+            throw new RuntimeException(e.getMessage());
         }
     }
-
 }

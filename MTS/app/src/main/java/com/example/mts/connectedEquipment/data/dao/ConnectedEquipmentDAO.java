@@ -9,8 +9,8 @@ import java.sql.SQLException;
 /**
  * DAO-класс для работы с подключённым оборудованием.
  */
-public class DAOConnectedEquipment extends BaseDaoImpl<ConnectedEquipment, Integer> {
-    public DAOConnectedEquipment(ConnectionSource connectionSource) throws SQLException {
+public class ConnectedEquipmentDAO extends BaseDaoImpl<ConnectedEquipment, Integer> {
+    public ConnectedEquipmentDAO(ConnectionSource connectionSource) throws SQLException {
         super(connectionSource, ConnectedEquipment.class);
     }
 }

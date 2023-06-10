@@ -1,7 +1,6 @@
-package com.example.mts.connectedEquipment.data.repository;
+package com.example.mts.connectedEquipment.domain.repository;
 
 import com.example.mts.connectedEquipment.data.database.ConnectedEquipmentDataSource;
-import com.example.mts.connectedEquipment.data.database.ConnectedEquipmentDataSourceImpl;
 import com.example.mts.connectedEquipment.domain.entity.ConnectedEquipment;
 
 import java.sql.SQLException;
@@ -9,6 +8,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.Completable;
 import io.reactivex.Maybe;
 
 /**
@@ -43,6 +43,42 @@ public class ConnectedEquipmentRepositoryImpl implements ConnectedEquipmentRepos
             } catch (SQLException e) {
                 emitter.onError(e);
             }
+        });
+    }
+
+    @Override
+    public Completable deleteConnectedEquipment(int id) {
+        return Completable.create(emitter -> {
+            try {
+                connectedEquipmentDataSource.deleteConnectedEquipment(id);
+                emitter.onComplete();
+            } catch (SQLException e) {
+                emitter.onError(e);
+            }
+        });
+    }
+
+    @Override
+    public Completable createConnectedEquipment(ConnectedEquipment connectedEquipment) {
+        return Completable.create(emitter -> {
+           try {
+               connectedEquipmentDataSource.createConnectedEquipment(connectedEquipment);
+               emitter.onComplete();
+           } catch (SQLException e) {
+               emitter.onError(e);
+           }
+        });
+    }
+
+    @Override
+    public Completable updateConnectedEquipment(ConnectedEquipment connectedEquipment) {
+        return Completable.create(emitter -> {
+           try {
+               connectedEquipmentDataSource.updateConnectedEquipment(connectedEquipment);
+               emitter.onComplete();
+           } catch (SQLException e) {
+               emitter.onError(e);
+           }
         });
     }
 }

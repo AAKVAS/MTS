@@ -1,20 +1,17 @@
 package com.example.mts.connectedEquipment.domain.interactor;
 
 import com.example.mts.connectedEquipment.domain.repository.ConnectedEquipmentRepository;
-import com.example.mts.connectedEquipment.domain.entity.ConnectedEquipment;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.Maybe;
+import io.reactivex.Completable;
 import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
 /**
- * UseСase-класс загрузки списка подключённого оборудования.
+ * UseCase-класс удаления записи о подключённом оборудовании.
  */
-public class GetConnectedEquipmentUseCase {
+public class DeleteConnectedEquipmentUseCase {
     /**
      * Репозиторий работы с оборудованием.
      */
@@ -26,23 +23,22 @@ public class GetConnectedEquipmentUseCase {
     Scheduler executorScheduler;
 
     /**
-     * Конструктор класса GetConnectedEquipmentUseCase.
+     * Конструктор класса DeleteConnectedEquipmentUseCase.
      * @param connectedEquipmentRepository репозиторий работы с оборудованием.
      * @param executorScheduler планировщик для извлечения записей.
      */
     @Inject
-    public GetConnectedEquipmentUseCase(ConnectedEquipmentRepository connectedEquipmentRepository, Scheduler executorScheduler) {
+    public DeleteConnectedEquipmentUseCase(ConnectedEquipmentRepository connectedEquipmentRepository, Scheduler executorScheduler) {
         this.connectedEquipmentRepository = connectedEquipmentRepository;
         this.executorScheduler = executorScheduler;
     }
 
     /**
-     * Выполнение извлечения оборудования.
-     * @return подключённое оборудование.
+     * Выполнение удаления оборудования.
+     * @return результат удаления.
      */
-    public Maybe<List<ConnectedEquipment>> execute() {
-        return connectedEquipmentRepository
-                .getConnectedEquipment()
+    public Completable execute(int id) {
+        return connectedEquipmentRepository.deleteConnectedEquipment(id)
                 .subscribeOn(executorScheduler)
                 .observeOn(AndroidSchedulers.mainThread());
     }

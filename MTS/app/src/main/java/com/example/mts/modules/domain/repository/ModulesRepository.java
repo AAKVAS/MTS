@@ -1,4 +1,4 @@
-package com.example.mts.modules.data.repository;
+package com.example.mts.modules.domain.repository;
 
 import com.example.mts.modules.domain.entity.Module;
 
