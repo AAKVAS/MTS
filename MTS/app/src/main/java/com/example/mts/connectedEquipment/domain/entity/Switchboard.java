@@ -4,15 +4,20 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
 @DatabaseTable(tableName = "SWITCHBOARD")
-public class Switchboard {
+public class Switchboard implements Serializable {
     public static final String UID = "UID";
+    public static final String INVENTORY_NUMBER = "INVENTORY_NUMBER";
 
     @DatabaseField(columnName = UID, generatedId = true)
     private int id;
+
+    @DatabaseField(columnName = INVENTORY_NUMBER)
+    private String inventoryNumber;
 
     @DatabaseField(foreign = true, foreignAutoRefresh = true)
     private Building building;
@@ -30,6 +35,14 @@ public class Switchboard {
         this.building = building;
         this.model = model;
         this.connectedEquipmentList = connectedEquipmentList;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Switchboard that = (Switchboard) o;
+        return id == that.id;
     }
 
     public int getId() {
@@ -62,5 +75,13 @@ public class Switchboard {
 
     public void setConnectedEquipmentList(List<ConnectedEquipment> connectedEquipmentList) {
         this.connectedEquipmentList = connectedEquipmentList;
+    }
+
+    public String getInventoryNumber() {
+        return inventoryNumber;
+    }
+
+    public void setInventoryNumber(String inventoryNumber) {
+        this.inventoryNumber = inventoryNumber;
     }
 }

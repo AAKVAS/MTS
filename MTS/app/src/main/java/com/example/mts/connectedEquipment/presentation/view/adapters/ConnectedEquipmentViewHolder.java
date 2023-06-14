@@ -1,4 +1,4 @@
-package com.example.mts.connectedEquipment.presentation.view;
+package com.example.mts.connectedEquipment.presentation.view.adapters;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;

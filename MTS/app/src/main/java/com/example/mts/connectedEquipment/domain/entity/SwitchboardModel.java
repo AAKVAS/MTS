@@ -4,11 +4,12 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
 @DatabaseTable(tableName = "SWITCHBOARD_MODEL")
-public class SwitchboardModel {
+public class SwitchboardModel implements Serializable {
     public static final String UID = "UID";
     public static final String NAME = "NAME";
     public static final String MAX_PORT_AMOUNT = "MAX_PORT_AMOUNT";

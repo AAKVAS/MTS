@@ -11,7 +11,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.CompletableObserver;
-import io.reactivex.MaybeObserver;
+import io.reactivex.SingleObserver;
 import io.reactivex.disposables.Disposable;
 
 /**
@@ -44,6 +44,11 @@ public class ConnectedEquipmentListPresenter {
     private ConnectedEquipment currentConnectedEquipment;
 
     /**
+     * Показывает нужно ли обновлять данные в представлении.
+     */
+    private boolean isViewNeedToReload = true;
+
+    /**
      * Возвращает список подключённого оборудования.
      * @return список подключённого оборудования.
      */
@@ -59,6 +64,22 @@ public class ConnectedEquipmentListPresenter {
         this.connectedEquipments = connectedEquipments;
     }
 
+    public boolean isViewNeedToReload() {
+        return isViewNeedToReload;
+    }
+
+    public void setViewNeedToReload(boolean viewNeedToReload) {
+        isViewNeedToReload = viewNeedToReload;
+    }
+
+    public ConnectedEquipment getCurrentConnectedEquipment() {
+        return currentConnectedEquipment;
+    }
+
+    public void setCurrentConnectedEquipment(ConnectedEquipment currentConnectedEquipment) {
+        this.currentConnectedEquipment = currentConnectedEquipment;
+    }
+
     /**
      * Конструктор по умолчанию.
      */
@@ -68,6 +89,7 @@ public class ConnectedEquipmentListPresenter {
      * Конструктор класса ConnectedEquipmentListPresenter.
      * @param view представление модуля.
      * @param getConnectedEquipmentUseCase UseCase загрузки списка подключённого оборудования.
+     * @param deleteConnectedEquipmentUseCase UseCase удаления подключённого оборудования.
      */
     @Inject
     public ConnectedEquipmentListPresenter(ConnectedEquipmentListView view,
@@ -84,10 +106,10 @@ public class ConnectedEquipmentListPresenter {
     }
 
     /**
-     * Заполняет список подключённого оборудования, если он пуст.
+     * Заполняет список подключённого оборудования, если необходимо.
      */
     public void fillConnectedEquipment() {
-        if (connectedEquipments.isEmpty()) {
+        if (isViewNeedToReload) {
             loadConnectedEquipment();
         }
     }
@@ -102,15 +124,14 @@ public class ConnectedEquipmentListPresenter {
     /**
      * Класс-наблюдатель, обновляющий список оборудования в представлении после успешной выгрузки.
      */
-    private class LoadConnectedEquipmentObserver implements MaybeObserver<List<ConnectedEquipment>> {
+    private class LoadConnectedEquipmentObserver implements SingleObserver<List<ConnectedEquipment>> {
 
         @Override
         public void onSubscribe(Disposable d) {}
 
         @Override
         public void onSuccess(List<ConnectedEquipment> connectedEquipments) {
-            ConnectedEquipmentListPresenter.this.connectedEquipments.clear();
-            ConnectedEquipmentListPresenter.this.connectedEquipments.addAll(connectedEquipments);
+            ConnectedEquipmentListPresenter.this.connectedEquipments = connectedEquipments;
             updateView();
         }
 
@@ -118,9 +139,6 @@ public class ConnectedEquipmentListPresenter {
         public void onError(Throwable e) {
             throw new RuntimeException("Возникла ошибка при получении списка модулей.");
         }
-
-        @Override
-        public void onComplete() {}
     }
 
     /**
@@ -135,6 +153,7 @@ public class ConnectedEquipmentListPresenter {
      * @param connectedEquipment нажатый элемент.
      */
     public void onEquipmentClick(ConnectedEquipment connectedEquipment) {
+        isViewNeedToReload = false;
         view.openConnectedEquipmentItem(connectedEquipment);
     }
 
@@ -151,7 +170,8 @@ public class ConnectedEquipmentListPresenter {
      * Удаляет текущую запись о подключённом оборудовании.
      */
     public void deleteConnectedEquipment() {
-        deleteConnectedEquipmentUseCase.execute(currentConnectedEquipment.getId()).subscribe(new DeleteConnectedEquipmentObserver());
+        deleteConnectedEquipmentUseCase.execute(new DeleteConnectedEquipmentUseCase.Param(currentConnectedEquipment.getId()))
+                .subscribe(new DeleteConnectedEquipmentObserver());
     }
 
     /**

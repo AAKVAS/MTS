@@ -1,4 +1,4 @@
-package com.example.mts.connectedEquipment.presentation.view;
+package com.example.mts.connectedEquipment.presentation.view.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mts.R;
 import com.example.mts.connectedEquipment.domain.entity.ConnectedEquipment;
-import com.example.mts.modules.domain.entity.Module;
-import com.example.mts.modules.presentation.view.ModulesViewHolder;
 
 import java.util.List;
 
@@ -24,7 +22,7 @@ public class ConnectedEquipmentAdapter extends RecyclerView.Adapter<ConnectedEqu
     /**
      * Интерфейс слушателя события нажатия на элемент списка.
      */
-    interface OnClickListener {
+    public interface OnClickListener {
         /**
          * Возникает при нажатии на элемент списка.
          * @param connectedEquipment элемент, на который произошло нажатие.
@@ -94,8 +92,9 @@ public class ConnectedEquipmentAdapter extends RecyclerView.Adapter<ConnectedEqu
 
     private void setCardTitle(CardView cardView, ConnectedEquipment connectedEquipment) {
         String title = connectedEquipment.getSwitchboard().getBuilding().getAddress()
-                + ".\n" + connectedEquipment.getSwitchboard().getModel().getName()
-                + " порт: " + connectedEquipment.getPortNumber();
+                + ".\nИнв. номер: " + connectedEquipment.getSwitchboard().getInventoryNumber()
+                + ". Модель: " + connectedEquipment.getSwitchboard().getModel().getName()
+                + ".\nПорт: " + connectedEquipment.getPortNumber();
         TextView textView = (TextView) cardView.findViewById(R.id.title);
         textView.setText(title);
     }

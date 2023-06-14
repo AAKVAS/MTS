@@ -1,5 +1,6 @@
 package com.example.mts.connectedEquipment.domain.interactor;
 
+import com.example.mts.base.BaseCompletableUseCase;
 import com.example.mts.connectedEquipment.domain.entity.ConnectedEquipment;
 import com.example.mts.connectedEquipment.domain.repository.ConnectedEquipmentRepository;
 
@@ -12,16 +13,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 /**
  * UseСase-класс создания записи подключённого оборудования.
  */
-public class CreateConnectedEquipmentUseCase {
-    /**
-     * Репозиторий работы с оборудованием.
-     */
-    ConnectedEquipmentRepository connectedEquipmentRepository;
+public class CreateConnectedEquipmentUseCase extends BaseCompletableUseCase<ConnectedEquipmentRepository, CreateConnectedEquipmentUseCase.Param> {
 
-    /**
-     * Планировщик для извлечения записей.
-     */
-    Scheduler executorScheduler;
 
     /**
      * Конструктор класса CreateConnectedEquipmentUseCase.
@@ -30,17 +23,27 @@ public class CreateConnectedEquipmentUseCase {
      */
     @Inject
     public CreateConnectedEquipmentUseCase(ConnectedEquipmentRepository connectedEquipmentRepository, Scheduler executorScheduler) {
-        this.connectedEquipmentRepository = connectedEquipmentRepository;
-        this.executorScheduler = executorScheduler;
+        super(connectedEquipmentRepository, executorScheduler);
     }
 
     /**
      * Выполнение добавления записи подключённого оборудования.
      * @return результат добавления.
      */
-    public Completable execute(ConnectedEquipment connectedEquipment) {
-        return connectedEquipmentRepository.createConnectedEquipment(connectedEquipment)
+    public Completable execute(Param param) {
+        return repository.createConnectedEquipment(param.connectedEquipment)
                 .subscribeOn(executorScheduler)
                 .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * Обёртка параметров для выполнения действия.
+     */
+    public static final class Param {
+        private ConnectedEquipment connectedEquipment;
+
+        public Param(ConnectedEquipment connectedEquipment) {
+            this.connectedEquipment = connectedEquipment;
+        }
     }
 }

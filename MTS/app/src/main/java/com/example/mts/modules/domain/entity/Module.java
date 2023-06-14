@@ -1,8 +1,5 @@
 package com.example.mts.modules.domain.entity;
 
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
-
 /**
  * Модуль мобильной торговой системы.
  */

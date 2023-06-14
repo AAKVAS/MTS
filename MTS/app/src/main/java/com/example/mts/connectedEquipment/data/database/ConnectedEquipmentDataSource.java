@@ -1,6 +1,9 @@
 package com.example.mts.connectedEquipment.data.database;
 
+import com.example.mts.connectedEquipment.domain.entity.Building;
+import com.example.mts.connectedEquipment.domain.entity.Cable;
 import com.example.mts.connectedEquipment.domain.entity.ConnectedEquipment;
+import com.example.mts.connectedEquipment.domain.entity.Switchboard;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -36,4 +39,18 @@ public interface ConnectedEquipmentDataSource {
      * @throws SQLException
      */
     void updateConnectedEquipment(ConnectedEquipment connectedEquipment) throws SQLException;
+
+    /**
+     * Возвращает список моделей кабелей.
+     * @return список моделей кабелей.
+     * @throws SQLException
+     */
+    List<Cable> getCables() throws SQLException;
+
+    /**
+     * Возвращает список зданий.
+     * @return список зданий.
+     * @throws SQLException
+     */
+    List<Building> getBuildings() throws SQLException;
 }

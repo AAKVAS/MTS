@@ -1,12 +1,14 @@
 package com.example.mts.connectedEquipment.domain.repository;
 
+import com.example.mts.connectedEquipment.domain.entity.Building;
+import com.example.mts.connectedEquipment.domain.entity.Cable;
 import com.example.mts.connectedEquipment.domain.entity.ConnectedEquipment;
+import com.example.mts.connectedEquipment.domain.entity.Switchboard;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import io.reactivex.Completable;
-import io.reactivex.Maybe;
+import io.reactivex.Single;
 
 /**
  * Интерфейс-репозиторий работы с подключённым оборудованием.
@@ -16,7 +18,7 @@ public interface ConnectedEquipmentRepository {
      * Возвращает список модулей.
      * @return список модулей.
      */
-    Maybe<List<ConnectedEquipment>> getConnectedEquipment();
+    Single<List<ConnectedEquipment>> getConnectedEquipment();
 
     /**
      * Удаляет указанное подключённое оборудование.
@@ -38,4 +40,16 @@ public interface ConnectedEquipmentRepository {
      * @return результат обновления записи.
      */
      Completable updateConnectedEquipment(ConnectedEquipment connectedEquipment);
+
+    /**
+     * Возвращает список моделей кабелей.
+     * @return список моделей кабелей.
+     */
+     Single<List<Cable>> getCables();
+
+    /**
+     * Возвращает список зданий.
+     * @return список зданий.
+     */
+    Single<List<Building>> getBuildings();
 }

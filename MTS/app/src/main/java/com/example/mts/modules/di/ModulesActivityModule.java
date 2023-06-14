@@ -1,11 +1,11 @@
 package com.example.mts.modules.di;
 
+import com.example.mts.modules.domain.interactor.GetModulesUseCase;
 import com.example.mts.modules.domain.repository.ModulesRepository;
 import com.example.mts.modules.domain.repository.ModulesRepositoryImpl;
-import com.example.mts.modules.domain.interactor.GetModulesUseCase;
-import com.example.mts.modules.presentation.view.ModulesView;
-import com.example.mts.modules.presentation.view.ModulesActivity;
 import com.example.mts.modules.presentation.presenter.ModulesActivityPresenter;
+import com.example.mts.modules.presentation.view.ModulesActivity;
+import com.example.mts.modules.presentation.view.ModulesView;
 
 import dagger.Module;
 import dagger.Provides;

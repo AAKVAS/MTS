@@ -9,7 +9,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.MaybeObserver;
+import io.reactivex.SingleObserver;
 import io.reactivex.disposables.Disposable;
 
 /**
@@ -65,7 +65,7 @@ public class ModulesActivityPresenter {
     /**
      * Класс-наблюдатель, обновляющий список модулей в представлении после успешной выгрузки.
      */
-    private class LoadModulesObserver implements MaybeObserver<List<Module>> {
+    private class LoadModulesObserver implements SingleObserver<List<Module>> {
 
         @Override
         public void onSubscribe(Disposable d) {
@@ -82,11 +82,6 @@ public class ModulesActivityPresenter {
         @Override
         public void onError(Throwable e) {
             throw new RuntimeException(e.getMessage());
-        }
-
-        @Override
-        public void onComplete() {
-
         }
     }
 

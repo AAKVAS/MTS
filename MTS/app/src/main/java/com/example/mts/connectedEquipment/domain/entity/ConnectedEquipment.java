@@ -3,8 +3,10 @@ package com.example.mts.connectedEquipment.domain.entity;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.io.Serializable;
+
 @DatabaseTable(tableName = "CONNECTED_EQUIPMENT")
-public class ConnectedEquipment {
+public class ConnectedEquipment implements Serializable {
     public static final String UID = "UID";
     public static final String PORT_NUMBER = "PORT_NUMBER";
     public static final String CABLE_LENGTH = "CABLE_LENGTH";

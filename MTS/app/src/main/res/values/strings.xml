@@ -4,17 +4,26 @@
     //Главная активность
     <string name="title_activity_main">МТС</string>
     <string name="header_activity_main">Макси</string>
-    <string name="login">Войти</string>
+    <string name="login">Перейти к разделам</string>
 
     //Общее
     <string name="confirm_delete">Вы точно хотите удалить запись?</string>
     <string name="yes">ДА</string>
     <string name="no">НЕТ</string>
+    <string name="save">Сохранить</string>
+    <string name="add">Добавить</string>
 
     //Модули
     <string name="title_modules_main">Модули</string>
     <string name="title_connected_equipment">Подключённое оборудование</string>
 
     /Подключённое оборудование
+    <string name="building_address">Адрес здания</string>
+    <string name="switchboard">Распределительный щит</string>
+    <string name="switchboard_port">Порт</string>
+    <string name="cable">Кабель</string>
+    <string name="cable_length">Длина кабеля</string>
+    <string name="connected_equipment_ip">IP-адрес подключённого устройства</string>
+    <string name="connected_equipment_mac">MAC-адрес подключённого устройства</string>
 
 </resources>

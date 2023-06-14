@@ -2,7 +2,6 @@ package com.example.mts.di;
 
 import com.example.mts.connectedEquipment.di.ConnectedEquipmentComponent;
 import com.example.mts.connectedEquipment.di.ConnectedEquipmentModule;
-import com.example.mts.connectedEquipment.presentation.view.ConnectedEquipmentListActivity;
 import com.example.mts.main.di.MainActivityComponent;
 import com.example.mts.main.di.MainActivityModule;
 import com.example.mts.modules.di.ModulesActivityComponent;

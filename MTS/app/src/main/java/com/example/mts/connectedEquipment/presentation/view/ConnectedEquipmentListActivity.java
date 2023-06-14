@@ -1,12 +1,13 @@
 package com.example.mts.connectedEquipment.presentation.view;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.DialogInterface;
-import android.os.Bundle;
 
 import com.example.mts.MTSApplication;
 import com.example.mts.R;
@@ -14,10 +15,7 @@ import com.example.mts.connectedEquipment.di.ConnectedEquipmentComponent;
 import com.example.mts.connectedEquipment.di.ConnectedEquipmentModule;
 import com.example.mts.connectedEquipment.domain.entity.ConnectedEquipment;
 import com.example.mts.connectedEquipment.presentation.presenter.ConnectedEquipmentListPresenter;
-import com.example.mts.modules.di.ModulesActivityComponent;
-import com.example.mts.modules.di.ModulesActivityModule;
-import com.example.mts.modules.domain.entity.Module;
-import com.example.mts.modules.presentation.view.ModulesAdapter;
+import com.example.mts.connectedEquipment.presentation.view.adapters.ConnectedEquipmentAdapter;
 
 import javax.inject.Inject;
 
@@ -37,6 +35,10 @@ public class ConnectedEquipmentListActivity extends AppCompatActivity implements
      */
     private ConnectedEquipmentComponent connectedEquipmentComponent;
 
+    private static final int REQUEST_CODE_ITEM = 1;
+
+    public static final String IS_VIEW_NEED_TO_RELOAD = "isViewNeedToReload";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,13 +46,26 @@ public class ConnectedEquipmentListActivity extends AppCompatActivity implements
         inject();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_ITEM) {
+            if (resultCode == RESULT_OK) {
+                if (data.hasExtra(IS_VIEW_NEED_TO_RELOAD)) {
+                    presenter.setViewNeedToReload(data.getBooleanExtra(IS_VIEW_NEED_TO_RELOAD, false));
+                }
+            }
+        }
+    }
+
+
     /**
      * Внедряет зависимости.
      */
     private void inject() {
         connectedEquipmentComponent = ((MTSApplication)getApplication())
                 .getAppComponent()
-                .plusConnectedEquipmentListActivityComponent(new ConnectedEquipmentModule(this));
+                .plusConnectedEquipmentListActivityComponent(ConnectedEquipmentModule.getInstance(this));
         connectedEquipmentComponent.inject(this);
     }
 
@@ -88,7 +103,9 @@ public class ConnectedEquipmentListActivity extends AppCompatActivity implements
 
     @Override
     public void openConnectedEquipmentItem(ConnectedEquipment connectedEquipment) {
-
+        Intent intent = new Intent(this, ConnectedEquipmentItemActivity.class);
+        intent.putExtra(ConnectedEquipmentItemActivity.CONNECTED_EQUIPMENT, connectedEquipment);
+        startActivityForResult(intent, REQUEST_CODE_ITEM);
     }
 
     @Override

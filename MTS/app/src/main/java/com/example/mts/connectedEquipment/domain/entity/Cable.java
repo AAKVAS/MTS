@@ -4,11 +4,12 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
 @DatabaseTable(tableName = "CABLE")
-public class Cable {
+public class Cable implements Serializable {
     public static final String UID = "UID";
     public static final String NAME = "NAME";
 

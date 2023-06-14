@@ -1,30 +1,21 @@
 package com.example.mts.modules.domain.interactor;
 
-import com.example.mts.modules.domain.repository.ModulesRepository;
+import com.example.mts.base.BaseSingleUseCase;
 import com.example.mts.modules.domain.entity.Module;
+import com.example.mts.modules.domain.repository.ModulesRepository;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.Maybe;
 import io.reactivex.Scheduler;
+import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
 /**
  * Класс-UseСase загрузки списка модулей.
  */
-public class GetModulesUseCase {
-    /**
-     * Репозиторий работы с модулями.
-     */
-    ModulesRepository modulesRepository;
-
-    /**
-     * Планировщик для извлечения записей.
-     */
-    Scheduler executorScheduler;
-
+public class GetModulesUseCase extends BaseSingleUseCase<ModulesRepository, List<Module>> {
     /**
      * Конструктор класса GetModulesUseCase.
      * @param repository репозиторий для работы с модулями.
@@ -32,15 +23,15 @@ public class GetModulesUseCase {
      */
     @Inject
     public GetModulesUseCase(ModulesRepository repository, Scheduler executorScheduler) {
-        this.modulesRepository = repository;
-        this.executorScheduler = executorScheduler;
+        super(repository, executorScheduler);
     }
 
     /**
      * Выполнение извлечения модулей.
      * @return
      */
-    public Maybe<List<Module>> execute() {
-        return modulesRepository.getModules().subscribeOn(executorScheduler).observeOn(AndroidSchedulers.mainThread());
+    @Override
+    public Single<List<Module>> execute() {
+        return repository.getModules().subscribeOn(executorScheduler).observeOn(AndroidSchedulers.mainThread());
     }
 }

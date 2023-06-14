@@ -1,7 +1,7 @@
 package com.example.mts.connectedEquipment.domain.interactor;
 
 import com.example.mts.base.BaseSingleUseCase;
-import com.example.mts.connectedEquipment.domain.entity.ConnectedEquipment;
+import com.example.mts.connectedEquipment.domain.entity.Cable;
 import com.example.mts.connectedEquipment.domain.repository.ConnectedEquipmentRepository;
 
 import java.util.List;
@@ -13,27 +13,26 @@ import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
 /**
- * UseСase-класс загрузки списка подключённого оборудования.
+ * UseСase-класс получения моделей кабелей.
  */
-public class GetConnectedEquipmentUseCase extends BaseSingleUseCase<ConnectedEquipmentRepository, List<ConnectedEquipment>> {
-
+public class GetCablesUseCase extends BaseSingleUseCase<ConnectedEquipmentRepository, List<Cable>> {
     /**
-     * Конструктор класса GetConnectedEquipmentUseCase.
+     * Конструктор класса GetCablesUseCase.
      * @param connectedEquipmentRepository репозиторий работы с оборудованием.
      * @param executorScheduler планировщик для извлечения записей.
      */
     @Inject
-    public GetConnectedEquipmentUseCase(ConnectedEquipmentRepository connectedEquipmentRepository, Scheduler executorScheduler) {
+    public GetCablesUseCase(ConnectedEquipmentRepository connectedEquipmentRepository, Scheduler executorScheduler) {
         super(connectedEquipmentRepository, executorScheduler);
     }
 
     /**
-     * Выполнение извлечения оборудования.
-     * @return подключённое оборудование.
+     * Выполнение извлечения моделей кабелей.
+     * @return модели кабелей.
      */
-    public Single<List<ConnectedEquipment>> execute() {
+    public Single<List<Cable>> execute() {
         return repository
-                .getConnectedEquipment()
+                .getCables()
                 .subscribeOn(executorScheduler)
                 .observeOn(AndroidSchedulers.mainThread());
     }
