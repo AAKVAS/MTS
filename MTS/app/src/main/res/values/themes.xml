@@ -17,7 +17,5 @@
     </style>
     <style name="et_primary_style" parent="Widget.AppCompat.EditText">
         <item name="backgroundTint">@color/primary_color</item>
-        <item name="android:textCursorDrawable">@color/primary_color</item>
     </style>
-
 </resources>

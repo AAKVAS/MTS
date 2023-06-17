@@ -34,7 +34,7 @@ public class ConnectedEquipmentListPresenter {
     DeleteConnectedEquipmentUseCase deleteConnectedEquipmentUseCase;
 
     /**
-     * Список модулей приложения.
+     * Список подключённого оборудования.
      */
     private List<ConnectedEquipment> connectedEquipments = new ArrayList<>();
 
@@ -79,7 +79,7 @@ public class ConnectedEquipmentListPresenter {
 
     /**
      * Конструктор класса ConnectedEquipmentListPresenter.
-     * @param view представление модуля.
+     * @param view представление списка подключённого оборудования.
      * @param getConnectedEquipmentUseCase UseCase загрузки списка подключённого оборудования.
      * @param deleteConnectedEquipmentUseCase UseCase удаления подключённого оборудования.
      */
@@ -124,7 +124,7 @@ public class ConnectedEquipmentListPresenter {
 
         @Override
         public void onError(Throwable e) {
-            throw new RuntimeException("Возникла ошибка при получении списка модулей.");
+            throw new RuntimeException("Возникла ошибка при получении списка подключённого оборудования.");
         }
     }
 
