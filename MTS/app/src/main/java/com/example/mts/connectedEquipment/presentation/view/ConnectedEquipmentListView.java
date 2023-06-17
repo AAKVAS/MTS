@@ -19,9 +19,8 @@ public interface ConnectedEquipmentListView {
 
     /**
      * Открывает окно добавления записи о подключённом оборудовании.
-     * @param connectedEquipment подключённое оборудование.
      */
-    void createConnectedEquipmentItem(ConnectedEquipment connectedEquipment);
+    void createConnectedEquipmentItem();
 
     /**
      * Открывает диалоговое окно подтверждения удаления подключённого оборудования.

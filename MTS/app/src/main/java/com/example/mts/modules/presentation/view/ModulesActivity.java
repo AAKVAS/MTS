@@ -54,6 +54,9 @@ public class ModulesActivity extends AppCompatActivity implements ModulesView {
         presenter.fillModules();
     }
 
+    /**
+     * Заполняет выпадающий список модулей данными.
+     */
     @Override
     public void fillModuleList() {
         RecyclerView recyclerView = findViewById(R.id.rv_module);
@@ -69,6 +72,10 @@ public class ModulesActivity extends AppCompatActivity implements ModulesView {
         adapter.notifyDataSetChanged();
     }
 
+    /**
+     * Открывает активность модуля.
+     * @param module открываемый модуль.
+     */
     @Override
     public void openModule(Module module) {
         Intent intent = new Intent(this, module.getModuleActivityClass());

@@ -4,9 +4,9 @@ import io.reactivex.Scheduler;
 import io.reactivex.Single;
 
 /**
- * Базовый UseCase для действий, возвращающих в качестве результата Single
+ * Базовый UseCase для действий, возвращающих в качестве результата Single.
  * @param <T> репозиторий для выполнения действия.
- * @param <V> тип данных, который оборачивается в Single
+ * @param <V> тип данных, который оборачивается в Single.
  */
 public abstract class BaseSingleUseCase<T, V> {
 

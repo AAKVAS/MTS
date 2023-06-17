@@ -36,8 +36,8 @@ public class MainActivityModule {
     }
 
     /**
-     * Возвращает представление модуля "Модули".
-     * @return представление модуля "Модули".
+     * Возвращает представление главной активности.
+     * @return представление главной активности.
      */
     @Provides
     public MainView provideMainView() {

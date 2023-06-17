@@ -11,6 +11,15 @@ import dagger.Subcomponent;
 @Subcomponent(modules = {ConnectedEquipmentModule.class})
 @ConnectedEquipmentScope
 public interface ConnectedEquipmentComponent {
+    /**
+     * Внедряет зависимости в активность списка подключённого оборудования.
+     * @param connectedEquipmentListActivity активность списка подключённого оборудования.
+     */
     void inject(ConnectedEquipmentListActivity connectedEquipmentListActivity);
+
+    /**
+     * Внедряет зависимости в активность работы с записью подключённого оборудования.
+     * @param connectedEquipmentItemActivity активность работы с записью подключённого оборудования.
+     */
     void inject(ConnectedEquipmentItemActivity connectedEquipmentItemActivity);
 }

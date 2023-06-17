@@ -8,6 +8,9 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Сущность, описывающая модель распределительного щита.
+ */
 @DatabaseTable(tableName = "SWITCHBOARD_MODEL")
 public class SwitchboardModel implements Serializable {
     public static final String UID = "UID";

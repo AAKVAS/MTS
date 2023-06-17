@@ -8,6 +8,9 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Сущность, описывающая здание.
+ */
 @DatabaseTable(tableName = "BUILDING")
 public class Building implements Serializable {
     public static final String UID = "UID";

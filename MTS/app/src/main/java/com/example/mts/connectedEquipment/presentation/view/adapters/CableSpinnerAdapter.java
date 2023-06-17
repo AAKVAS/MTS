@@ -15,8 +15,16 @@ import com.example.mts.connectedEquipment.domain.entity.Cable;
 
 import java.util.List;
 
+/**
+ * Адаптер для выпадающего списка моделей кабелей.
+ */
 public class CableSpinnerAdapter extends ArrayAdapter<Cable> {
 
+    /**
+     * Конструктор адаптера CableSpinnerAdapter.
+     * @param context текущий контекст.
+     * @param cables список моделей кабелей для заполнения.
+     */
     public CableSpinnerAdapter(Context context, List<Cable> cables) {
         super(context, 0, cables);
     }

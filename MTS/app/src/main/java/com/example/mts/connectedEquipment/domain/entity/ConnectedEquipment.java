@@ -5,6 +5,9 @@ import com.j256.ormlite.table.DatabaseTable;
 
 import java.io.Serializable;
 
+/**
+ * Сущность, описывающая подключённое оборудование.
+ */
 @DatabaseTable(tableName = "CONNECTED_EQUIPMENT")
 public class ConnectedEquipment implements Serializable {
     public static final String UID = "UID";
@@ -13,13 +16,15 @@ public class ConnectedEquipment implements Serializable {
     public static final String IP = "IP";
     public static final String MAC = "MAC";
 
+    public static final String U_IDX_SWITCHBOARD_PORT = "U_IDX_SWITCHBOARD_PORT";
+
     @DatabaseField(columnName = UID, generatedId = true)
     private int id;
 
-    @DatabaseField(foreign = true, foreignAutoRefresh = true)
+    @DatabaseField(foreign = true, foreignAutoRefresh = true, uniqueIndexName = U_IDX_SWITCHBOARD_PORT)
     private Switchboard switchboard;
 
-    @DatabaseField(columnName = PORT_NUMBER)
+    @DatabaseField(columnName = PORT_NUMBER, uniqueIndexName = U_IDX_SWITCHBOARD_PORT)
     private int portNumber;
 
     @DatabaseField(foreign = true, foreignAutoRefresh = true)

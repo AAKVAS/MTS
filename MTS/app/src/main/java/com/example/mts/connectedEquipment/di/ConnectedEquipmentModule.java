@@ -30,7 +30,7 @@ import dagger.Provides;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Модуль подключённого оборудования. Предоставляет реализации для внедрения.
+ * Модуль подключённого оборудования. Предоставляет реализации для внедрения зависимостей.
  */
 @Module
 public class ConnectedEquipmentModule {
@@ -80,7 +80,7 @@ public class ConnectedEquipmentModule {
 
     /**
      * Конструктор класса ConnectedEquipmentModule.
-     * @param connectedEquipmentListActivity списка подключённого оборудования.
+     * @param connectedEquipmentListActivity активность списка подключённого оборудования.
      */
     private ConnectedEquipmentModule(ConnectedEquipmentListActivity connectedEquipmentListActivity) {
         this.connectedEquipmentListActivity = connectedEquipmentListActivity;
@@ -97,7 +97,6 @@ public class ConnectedEquipmentModule {
     public ConnectedEquipmentListPresenter provideConnectedEquipmentListPresenter(GetConnectedEquipmentUseCase getUseCase, DeleteConnectedEquipmentUseCase delUseCase) {
         return new ConnectedEquipmentListPresenter(connectedEquipmentListActivity, getUseCase, delUseCase);
     }
-
 
     /**
      * Возвращает представителя для работы с записью о подключённом оборудовании.
@@ -247,7 +246,7 @@ public class ConnectedEquipmentModule {
         try {
             return new ConnectedEquipmentDAO(connectionSource);
         } catch (SQLException e) {
-            throw new RuntimeException("Произошла ошибка при создании ConnectedEquipmentDAO");
+            throw new RuntimeException("Произошла ошибка при создании ConnectedEquipmentDAO.");
         }
     }
 
@@ -262,7 +261,7 @@ public class ConnectedEquipmentModule {
         try {
             return new CableDAO(connectionSource);
         } catch (SQLException e) {
-            throw new RuntimeException("Произошла ошибка при создании CableDAO");
+            throw new RuntimeException("Произошла ошибка при создании CableDAO.");
         }
     }
 
@@ -277,7 +276,7 @@ public class ConnectedEquipmentModule {
         try {
             return new BuildingDAO(connectionSource);
         } catch (SQLException e) {
-            throw new RuntimeException("Произошла ошибка при создании BuildingDAO");
+            throw new RuntimeException("Произошла ошибка при создании BuildingDAO.");
         }
     }
 
@@ -292,12 +291,12 @@ public class ConnectedEquipmentModule {
         try {
             return new SwitchboardModelsDAO(connectionSource);
         } catch (SQLException e) {
-            throw new RuntimeException("Произошла ошибка при создании SwitchboardModelsDAO");
+            throw new RuntimeException("Произошла ошибка при создании SwitchboardModelsDAO.");
         }
     }
     
     /**
-     * Возвращает DAO  электрических щитков.
+     * Возвращает DAO электрических щитков.
      * @param connectionSource источник соединения.
      * @return DAO электрических щитков
      */
@@ -307,7 +306,7 @@ public class ConnectedEquipmentModule {
         try {
             return new SwitchboardDAO(connectionSource);
         } catch (SQLException e) {
-            throw new RuntimeException("Произошла ошибка при создании SwitchboardDAO");
+            throw new RuntimeException("Произошла ошибка при создании SwitchboardDAO.");
         }
     }
 }

@@ -11,12 +11,12 @@ import io.reactivex.Completable;
 import io.reactivex.Single;
 
 /**
- * Интерфейс-репозиторий работы с подключённым оборудованием.
+ * Интерфейс репозитория работы с подключённым оборудованием.
  */
 public interface ConnectedEquipmentRepository {
     /**
-     * Возвращает список модулей.
-     * @return список модулей.
+     * Возвращает список подключённого оборудования.
+     * @return список подключённого оборудования.
      */
     Single<List<ConnectedEquipment>> getConnectedEquipment();
 

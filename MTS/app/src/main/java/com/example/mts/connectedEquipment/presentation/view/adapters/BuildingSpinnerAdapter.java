@@ -15,9 +15,17 @@ import com.example.mts.connectedEquipment.domain.entity.Building;
 
 import java.util.List;
 
-public class BuildingAdapter extends ArrayAdapter<Building> {
+/**
+ * Адаптер для выпадающего списка зданий.
+ */
+public class BuildingSpinnerAdapter extends ArrayAdapter<Building> {
 
-    public BuildingAdapter(Context context, List<Building> buildings) {
+    /**
+     * Конструктор адаптера BuildingAdapter.
+     * @param context текущий контекст.
+     * @param buildings список зданий для заполнения.
+     */
+    public BuildingSpinnerAdapter(Context context, List<Building> buildings) {
         super(context, 0, buildings);
     }
 

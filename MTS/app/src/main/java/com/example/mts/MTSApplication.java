@@ -36,10 +36,17 @@ public class MTSApplication extends Application {
      */
     private AppComponent appComponent;
 
+    /**
+     * Список модулей приложения.
+     */
     private List<Module> appModules = new ArrayList<Module>(
             Arrays.asList(new Module("Подключённое оборудование", ConnectedEquipmentListActivity.class)
             ));
 
+    /**
+     * Возвращает список модулей приложения.
+     * @return список модулей приложения.
+     */
     public List<Module> getAppModules() {
         return appModules;
     }
@@ -60,6 +67,10 @@ public class MTSApplication extends Application {
         super.onTerminate();
     }
 
+    /**
+     * Возвращает компонент приложения для внедрения зависимостей.
+     * @return компонент приложения для внедрения зависимостей.
+     */
     public AppComponent getAppComponent() {
         return appComponent;
     }

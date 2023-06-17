@@ -14,10 +14,26 @@ import com.j256.ormlite.table.TableUtils;
 
 import java.sql.SQLException;
 
+/**
+ * Класс, настраивающий базу данных при установке или обновлении приложения.
+ */
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
+
+    /**
+     * Имя базы данных.
+     */
     private static final String DATABASE_NAME = "mts.db";
+
+    /**
+     * Версия базы данных.
+     */
     private static final int DATABASE_VERSION = 1;
 
+
+    /**
+     * Конструктор класса DatabaseHelper.
+     * @param context текущий контекст.
+     */
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -57,6 +73,10 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         }
     }
 
+    /**
+     * Добавляет начальные записи в базу.
+     * @param db база данных.
+     */
     private void insertConnectedEquipment(SQLiteDatabase db) {
         db.execSQL("INSERT INTO building (address) VALUES ('Вологда, Молодёжная 25а')");
         db.execSQL("INSERT INTO building (address) VALUES ('Вологда, Пошехонское ш. 22')");

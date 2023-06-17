@@ -49,8 +49,8 @@ public class ConnectedEquipmentAdapter extends RecyclerView.Adapter<ConnectedEqu
     private List<ConnectedEquipment> connectedEquipments;
 
     /**
-     * Конструктор класса ModulesAdapter.
-     * @param connectedEquipments подключённого оборудования.
+     * Конструктор класса ConnectedEquipmentAdapter.
+     * @param connectedEquipments список подключённого оборудования.
      * @param onClickListener слушатель события onClick.
      */
     public ConnectedEquipmentAdapter(List<ConnectedEquipment> connectedEquipments, OnClickListener onClickListener) {
@@ -90,6 +90,11 @@ public class ConnectedEquipmentAdapter extends RecyclerView.Adapter<ConnectedEqu
         });
     }
 
+    /**
+     * Устанавливает заголовок в строке о подключённом оборудовании.
+     * @param cardView представление строки.
+     * @param connectedEquipment исходная запись о подключённом оборудовании.
+     */
     private void setCardTitle(CardView cardView, ConnectedEquipment connectedEquipment) {
         String title = connectedEquipment.getSwitchboard().getBuilding().getAddress()
                 + ".\nИнв. номер: " + connectedEquipment.getSwitchboard().getInventoryNumber()
@@ -99,6 +104,11 @@ public class ConnectedEquipmentAdapter extends RecyclerView.Adapter<ConnectedEqu
         textView.setText(title);
     }
 
+    /**
+     * Устанавливает подзаголовок в строке о подключённом оборудовании.
+     * @param cardView представление строки.
+     * @param connectedEquipment исходная запись о подключённом оборудовании.
+     */
     private void setCardSubtitle(CardView cardView, ConnectedEquipment connectedEquipment) {
         String subtitle = "IP: " + connectedEquipment.getIp() + "\nMAC: " + connectedEquipment.getMac();
         TextView textView = (TextView) cardView.findViewById(R.id.subtitle);

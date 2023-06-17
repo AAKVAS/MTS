@@ -26,12 +26,24 @@ public class ConnectedEquipmentDataSourceImpl implements ConnectedEquipmentDataS
      */
     private ConnectedEquipmentDAO connectedEquipmentDAO;
 
+    /**
+     * DAO для доступа к моделям кабелей.
+     */
     private CableDAO cableDAO;
 
+    /**
+     * DAO для доступа к зданиям.
+     */
     private BuildingDAO buildingDAO;
 
+    /**
+     * DAO для доступа к моделям электрических щитков.
+     */
     private SwitchboardModelsDAO switchboardModelsDAO;
 
+    /**
+     * DAO для доступа к электрическим щиткам.
+     */
     private SwitchboardDAO switchboardDAO;
 
     /**

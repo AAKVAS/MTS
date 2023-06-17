@@ -5,6 +5,9 @@ import java.lang.annotation.RetentionPolicy;
 
 import javax.inject.Scope;
 
+/**
+ * Область активности "Модули".
+ */
 @Scope
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ModulesScope {

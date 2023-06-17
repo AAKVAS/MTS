@@ -15,11 +15,20 @@ import com.example.mts.modules.presentation.view.ModulesActivity;
 import javax.inject.Inject;
 
 
+/**
+ * Главная активность приложения.
+ */
 public class MainActivity extends AppCompatActivity implements MainView {
 
+    /**
+     * Представитель главной активности.
+     */
     @Inject
     MainActivityPresenter presenter;
 
+    /**
+     * Компонент для реализации внедрения зависимости.
+     */
     private MainActivityComponent mainActivityComponent;
 
     @Override
@@ -29,6 +38,9 @@ public class MainActivity extends AppCompatActivity implements MainView {
         inject();
     }
 
+    /**
+     * Внедряет зависимости.
+     */
     private void inject() {
         mainActivityComponent = ((MTSApplication)getApplication())
                 .getAppComponent()
@@ -42,6 +54,10 @@ public class MainActivity extends AppCompatActivity implements MainView {
         startActivity(intent);
     }
 
+    /**
+     * Срабатывает при нажатии на кнопку перехлда к разделам.
+     * @param view представление, вызвавшее метод.
+     */
     public void btnLoginClick(View view) {
         presenter.btnLoginClick();
     }

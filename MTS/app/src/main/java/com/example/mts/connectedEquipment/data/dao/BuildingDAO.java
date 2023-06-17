@@ -7,7 +7,7 @@ import com.j256.ormlite.support.ConnectionSource;
 import java.sql.SQLException;
 
 /**
- * DAO-класс для доступа к зданиям
+ * DAO-класс для доступа к зданиям.
  */
 public class BuildingDAO extends BaseDaoImpl<Building, Integer> {
     public BuildingDAO(ConnectionSource connectionSource) throws SQLException {

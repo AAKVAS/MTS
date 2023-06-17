@@ -28,7 +28,7 @@ public class GetModulesUseCase extends BaseSingleUseCase<ModulesRepository, List
 
     /**
      * Выполнение извлечения модулей.
-     * @return
+     * @return список модулей.
      */
     @Override
     public Single<List<Module>> execute() {

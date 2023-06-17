@@ -15,10 +15,18 @@ import com.example.mts.connectedEquipment.domain.entity.Switchboard;
 
 import java.util.List;
 
+/**
+ * Адаптер для выпадающего списка распределительных щитков.
+ */
 public class SwitchboardAdapter extends ArrayAdapter<Switchboard>  {
 
-    public SwitchboardAdapter(Context context, List<Switchboard> models) {
-        super(context, 0, models);
+    /**
+     * Конструктор адаптера SwitchboardAdapter.
+     * @param context текущий контекст.
+     * @param switchboard список распределительных щитков для заполнения.
+     */
+    public SwitchboardAdapter(Context context, List<Switchboard> switchboard) {
+        super(context, 0, switchboard);
     }
 
     @NonNull

@@ -8,6 +8,7 @@
 
     //Общее
     <string name="confirm_delete">Вы точно хотите удалить запись?</string>
+    <string name="ok">ОК</string>
     <string name="yes">ДА</string>
     <string name="no">НЕТ</string>
     <string name="save">Сохранить</string>
@@ -17,7 +18,7 @@
     <string name="title_modules_main">Модули</string>
     <string name="title_connected_equipment">Подключённое оборудование</string>
 
-    /Подключённое оборудование
+    //Подключённое оборудование
     <string name="building_address">Адрес здания</string>
     <string name="switchboard">Распределительный щит</string>
     <string name="switchboard_port">Порт</string>
@@ -25,5 +26,6 @@
     <string name="cable_length">Длина кабеля</string>
     <string name="connected_equipment_ip">IP-адрес подключённого устройства</string>
     <string name="connected_equipment_mac">MAC-адрес подключённого устройства</string>
+    <string name="connected_equipment_uniqueness_error">Порт уже занят;</string>
 
 </resources>

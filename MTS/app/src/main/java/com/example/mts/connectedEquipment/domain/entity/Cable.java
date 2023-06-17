@@ -8,6 +8,9 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Сущность, описывающая модель кабеля.
+ */
 @DatabaseTable(tableName = "CABLE")
 public class Cable implements Serializable {
     public static final String UID = "UID";

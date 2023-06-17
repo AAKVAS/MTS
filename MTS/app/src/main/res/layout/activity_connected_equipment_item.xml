@@ -96,7 +96,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             style="@style/et_primary_style"
-            android:inputType="number"
+            android:digits="0123456789."
             android:height="48dp">
         </EditText>
     </LinearLayout>
@@ -115,6 +115,7 @@
             android:id="@+id/et_connected_equipment_ip"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:digits="0123456789."
             android:height="48dp"
             style="@style/et_primary_style">
         </EditText>
@@ -134,6 +135,7 @@
             android:id="@+id/et_connected_equipment_mac"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:digits="0123456789abcdefABCDEF-:"
             android:height="48dp"
             style="@style/et_primary_style">
         </EditText>

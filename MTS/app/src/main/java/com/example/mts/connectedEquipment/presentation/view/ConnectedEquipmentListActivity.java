@@ -3,6 +3,7 @@ package com.example.mts.connectedEquipment.presentation.view;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,8 +36,14 @@ public class ConnectedEquipmentListActivity extends AppCompatActivity implements
      */
     private ConnectedEquipmentComponent connectedEquipmentComponent;
 
+    /**
+     * Константный код идентификации зависимой активности.
+     */
     private static final int REQUEST_CODE_ITEM = 1;
 
+    /**
+     * Константное название параметра, определяющего, нужно ли обновить данные в текущей активности.
+     */
     public static final String IS_VIEW_NEED_TO_RELOAD = "isViewNeedToReload";
 
     @Override
@@ -75,12 +82,9 @@ public class ConnectedEquipmentListActivity extends AppCompatActivity implements
         presenter.fillConnectedEquipment();
     }
 
-    @Override
-    protected void onDestroy() {
-        presenter.onDestroy();
-        super.onDestroy();
-    }
-
+    /**
+     * Заполняет данными представление.
+     */
     @Override
     public void fillConnectedEquipmentList() {
         RecyclerView recyclerView = findViewById(R.id.rv_connected_equipment);
@@ -101,6 +105,13 @@ public class ConnectedEquipmentListActivity extends AppCompatActivity implements
         adapter.notifyDataSetChanged();
     }
 
+    /**
+     * Срабатывает при нажатии на кнопку добавления.
+     * @param view представление, вызвавшее мметод.
+     */
+    public void btnAddClick(View view) {
+        presenter.onbtnAddClick();
+    }
     @Override
     public void openConnectedEquipmentItem(ConnectedEquipment connectedEquipment) {
         Intent intent = new Intent(this, ConnectedEquipmentItemActivity.class);
@@ -109,8 +120,10 @@ public class ConnectedEquipmentListActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void createConnectedEquipmentItem(ConnectedEquipment connectedEquipment) {
-
+    public void createConnectedEquipmentItem() {
+        Intent intent = new Intent(this, ConnectedEquipmentItemActivity.class);
+        intent.putExtra(ConnectedEquipmentItemActivity.IS_CREATING, true);
+        startActivityForResult(intent, REQUEST_CODE_ITEM);
     }
 
     @Override

@@ -64,20 +64,12 @@ public class ConnectedEquipmentListPresenter {
         this.connectedEquipments = connectedEquipments;
     }
 
-    public boolean isViewNeedToReload() {
-        return isViewNeedToReload;
-    }
-
+    /**
+     * Устанавливает свойство необходимости обновлять представление при возникновении события onResume().
+     * @param viewNeedToReload свойство необходимости обновлять представление.
+     */
     public void setViewNeedToReload(boolean viewNeedToReload) {
         isViewNeedToReload = viewNeedToReload;
-    }
-
-    public ConnectedEquipment getCurrentConnectedEquipment() {
-        return currentConnectedEquipment;
-    }
-
-    public void setCurrentConnectedEquipment(ConnectedEquipment currentConnectedEquipment) {
-        this.currentConnectedEquipment = currentConnectedEquipment;
     }
 
     /**
@@ -98,11 +90,6 @@ public class ConnectedEquipmentListPresenter {
         this.view = view;
         this.getConnectedEquipmentUseCase = getConnectedEquipmentUseCase;
         this.deleteConnectedEquipmentUseCase = deleteConnectedEquipmentUseCase;
-    }
-
-    public void onDestroy() {
-        getConnectedEquipmentUseCase = null;
-        deleteConnectedEquipmentUseCase = null;
     }
 
     /**
@@ -164,6 +151,13 @@ public class ConnectedEquipmentListPresenter {
     public void onEquipmentLongClick(ConnectedEquipment connectedEquipment) {
         currentConnectedEquipment = connectedEquipment;
         view.openDeleteConnectedEquipmentDialog();
+    }
+
+    /**
+     * Возникает при нажатии на кнопку добавления.
+     */
+    public void onbtnAddClick() {
+        view.createConnectedEquipmentItem();
     }
 
     /**
