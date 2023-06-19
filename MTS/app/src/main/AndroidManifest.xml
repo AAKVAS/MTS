@@ -10,13 +10,13 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.MTS"
         tools:targetApi="31">
         <activity
             android:name=".main.presentation.MainActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,13 +27,16 @@
         <activity
             android:name=".modules.presentation.view.ModulesActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:label="@string/title_modules_main" />
         <activity
             android:name=".connectedEquipment.presentation.view.ConnectedEquipmentListActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:label="@string/title_connected_equipment" />
         <activity
             android:name=".connectedEquipment.presentation.view.ConnectedEquipmentItemActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_connected_equipment"
             android:exported="false" />
     </application>
