@@ -1,154 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".connectedEquipment.presentation.view.ConnectedEquipmentItemActivity">
-
+    android:layout_width="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="top"
-        android:padding="8dp">
-        <TextView
-            android:layout_width="wrap_content"
+        tools:context=".connectedEquipment.presentation.view.ConnectedEquipmentItemActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/gray"
-            android:text="@string/building_address"/>
-        <Spinner
-            android:id="@+id/sp_address"
+            android:orientation="vertical"
+            android:gravity="top"
+            android:padding="8dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray"
+                android:text="@string/building_address"/>
+            <Spinner
+                android:id="@+id/sp_address"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                style="@style/sp_primary_style">
+            </Spinner>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray"
+                android:text="@string/switchboard"/>
+            <Spinner
+                android:id="@+id/sp_switchboard"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                style="@style/sp_primary_style">
+            </Spinner>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray"
+                android:text="@string/switchboard_port"/>
+            <EditText
+                android:id="@+id/et_port"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:height="48dp"
+                android:inputType="number"
+                style="@style/et_primary_style">
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray"
+                android:text="@string/cable"/>
+            <Spinner
+                android:id="@+id/sp_cables"
+                android:layout_width="match_parent"
+                android:layout_height="48dp">
+            </Spinner>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray"
+                android:text="@string/cable_length"/>
+            <EditText
+                android:id="@+id/et_cable_length"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                style="@style/et_primary_style"
+                android:digits="0123456789."
+                android:height="48dp">
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray"
+                android:text="@string/connected_equipment_ip"/>
+            <EditText
+                android:id="@+id/et_connected_equipment_ip"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:digits="0123456789."
+                android:height="48dp"
+                style="@style/et_primary_style">
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray"
+                android:text="@string/connected_equipment_mac"/>
+            <EditText
+                android:id="@+id/et_connected_equipment_mac"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:digits="0123456789abcdefABCDEF-:"
+                android:height="48dp"
+                style="@style/et_primary_style">
+            </EditText>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_save"
+            style="@style/btn_primary_style"
+            android:onClick="btnSaveClick"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            style="@style/sp_primary_style">
-        </Spinner>
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginHorizontal="64dp"
+            android:layout_marginVertical="24dp"
+            android:text="@string/save" />
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="8dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/gray"
-            android:text="@string/switchboard"/>
-        <Spinner
-            android:id="@+id/sp_switchboard"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            style="@style/sp_primary_style">
-        </Spinner>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="8dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/gray"
-            android:text="@string/switchboard_port"/>
-        <EditText
-            android:id="@+id/et_port"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:height="48dp"
-            android:inputType="number"
-            style="@style/et_primary_style">
-        </EditText>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="8dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/gray"
-            android:text="@string/cable"/>
-        <Spinner
-            android:id="@+id/sp_cables"
-            android:layout_width="match_parent"
-            android:layout_height="48dp">
-        </Spinner>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="8dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/gray"
-            android:text="@string/cable_length"/>
-        <EditText
-            android:id="@+id/et_cable_length"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            style="@style/et_primary_style"
-            android:digits="0123456789."
-            android:height="48dp">
-        </EditText>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="8dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/gray"
-            android:text="@string/connected_equipment_ip"/>
-        <EditText
-            android:id="@+id/et_connected_equipment_ip"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:digits="0123456789."
-            android:height="48dp"
-            style="@style/et_primary_style">
-        </EditText>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="8dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/gray"
-            android:text="@string/connected_equipment_mac"/>
-        <EditText
-            android:id="@+id/et_connected_equipment_mac"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:digits="0123456789abcdefABCDEF-:"
-            android:height="48dp"
-            style="@style/et_primary_style">
-        </EditText>
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/btn_save"
-        style="@style/btn_primary_style"
-        android:onClick="btnSaveClick"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginHorizontal="64dp"
-        android:layout_marginVertical="24dp"
-        android:text="@string/save" />
-</LinearLayout>
+</ScrollView>
